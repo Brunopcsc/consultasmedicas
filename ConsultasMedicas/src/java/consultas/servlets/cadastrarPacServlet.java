@@ -59,7 +59,7 @@ public class cadastrarPacServlet extends HttpServlet {
                 try {
                     dataNascimento = sdf.parse(npfb.getDataNascimento());
                 } catch (ParseException e) {
-                    request.setAttribute("mensagem", "data");
+                    request.setAttribute("mensagem",  e.getLocalizedMessage());
                     request.getRequestDispatcher("erro.jsp").forward(request, response);
                 }
                 try {
@@ -75,7 +75,7 @@ public class cadastrarPacServlet extends HttpServlet {
                     request.getRequestDispatcher("index.jsp").forward(request, response);
                 } catch (Exception e) {
                     e.printStackTrace();
-                    request.setAttribute("mensagem", e.toString());
+                    request.setAttribute("mensagem",  e.getLocalizedMessage());
                     request.getRequestDispatcher("erro.jsp").forward(request, response);
                 }
             } else {
@@ -84,7 +84,7 @@ public class cadastrarPacServlet extends HttpServlet {
             }
         } catch (Exception e) {
             e.printStackTrace();
-            request.setAttribute("mensagem",npfb.getCPF());
+            request.setAttribute("mensagem", e.getLocalizedMessage());
             request.getRequestDispatcher("erro.jsp").forward(request, response);
         }
     }

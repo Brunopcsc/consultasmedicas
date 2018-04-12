@@ -19,7 +19,7 @@
     <body>
         ${mensagens}
         ${mensagem}
-        <h3> <a href="login.jsp">Cadastro de Médico</a></h3>
+        <h3> <a href="cadastroMedico.jsp">Cadastro de Médico</a></h3>
         <h3> <a href="cadastroPaciente.jsp">Cadastro de Paciente</a></h3>
         <h3> <a href="listarMedicos.jsp">Listagem de Médicos</a></h3>       
         <h3> <a href="login.jsp">Agendar Consulta</a></h3>      
