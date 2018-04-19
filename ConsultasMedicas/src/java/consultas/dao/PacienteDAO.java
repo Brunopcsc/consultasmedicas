@@ -11,6 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Date;
 import javax.sql.DataSource;
 import javax.naming.NamingException;
 
@@ -28,7 +29,7 @@ public class PacienteDAO {
     private final static String BUSCAR_PACIENTE_SQL = "select"
             + " CPF, nome, senha, telefone,sexo, dataDeNascimento"
             + " from paciente"
-            + " where CPF=?";
+            + " where CPF=? AND SENHA=?";
     
     DataSource dataSource;
 
@@ -50,5 +51,29 @@ public class PacienteDAO {
 
         }
         return u;
+    }
+    
+     public Paciente verificaLogin(String cpf, String senha) throws SQLException {
+        try (Connection con = dataSource.getConnection();
+                PreparedStatement ps = con.prepareStatement(BUSCAR_PACIENTE_SQL)) {
+
+            ps.setString(1, cpf);
+            ps.setString(2, senha);
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs != null) {
+                rs.next();
+                    Paciente paciente = new Paciente();
+                    paciente.setCPF(rs.getString("CPF"));
+                    paciente.setNome(rs.getString("nome"));
+                    paciente.setDataNascimento(new Date(rs.getDate("dataDeNascimento").getTime()));
+                    paciente.setTelefone(rs.getString("telefone"));
+                    paciente.setSenha(rs.getString("senha"));
+                    paciente.setSexo(rs.getString("sexo"));
+                    return paciente;
+                } else {
+                    return null;
+                }
+            }
+        }
     }
 }

@@ -3,8 +3,8 @@
     Created on : 12/04/2018, 09:46:12
     Author     : Bruno
 --%>
-
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <!DOCTYPE html>
 <html>
     <head>
@@ -14,11 +14,11 @@
     <body>
         
         <form action="cadastrarMedServlet" method="post">
-           CRM: <input name="cpf" type="text" value="" /><br/>
+           CRM: <input name="CRM" type="text" value="" /><br/>
            Nome: <input name="nome" type="text" value="" /><br/>
            Senha: <input name="senha" type="password" value="" /><br/>
-           Especialidade: <input name="telefone" type="text" value="" /><br/>           
-           <button type="submite">Confirmar</button>
+           Especialidade: <input name="especialidade" type="text" value="" /><br/>           
+           <button type="submit">Confirmar</button>
         </form>
     </body>
 </html>

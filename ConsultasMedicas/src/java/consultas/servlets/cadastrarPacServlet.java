@@ -68,7 +68,8 @@ public class cadastrarPacServlet extends HttpServlet {
                     u.setNome(npfb.getNome());
                     u.setSenha(npfb.getSenha());
                     u.setTelefone(npfb.getTelefone());
-                    u.setSexo("M");
+                    String sexo = npfb.getSexo().toUpperCase().equals("MASCULINO") ? "M" : "F";
+                    u.setSexo(sexo);
                     u.setDataNascimento(dataNascimento);
                     u = pdao.gravarPaciente(u);
                     request.setAttribute("mensagem", "Paciente Cadastrado!");

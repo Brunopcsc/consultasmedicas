@@ -9,8 +9,8 @@ package consultas.beans;
  *
  * @author Bruno
  */
-public class Login {
-    private String nome,senha,tipo;
+public class Administrador {
+    String nome,senha;
 
     public String getNome() {
         return nome;
@@ -26,14 +26,6 @@ public class Login {
 
     public void setSenha(String senha) {
         this.senha = senha;
-    }
-
-    public String getTipo() {
-        return tipo;
-    }
-
-    public void setEspecialidade(String tipo) {
-        this.tipo = tipo;
     }
     
 }

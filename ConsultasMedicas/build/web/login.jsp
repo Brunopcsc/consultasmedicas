@@ -4,8 +4,11 @@
     Author     : Bruno
 --%>
 
+
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:remove scope="session" var="novoPaciente" />
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,11 +16,19 @@
     </head>
     <body>
         
-
-        <form action="LoginServelet" method="post">
+        ${erro}
+        ${mensagens}
+        <form action="LoginServlet?pagina=login" method="post">
             Digite suas informações de login:<br/>
-            Nome: <input name="nome" type="text" value="" /><br/>
+            Login: <input name="login" type="text" value="" /><br/>
             Senha: <input name="senha" type="password" value="" /><br/>
-            <input type="submit" value="Enviar"/>
+             <select name="tipo">
+                <option value="administrador">Administrador</option>
+                <option value="paciente">Paciente</option>
+                <option value="medico">Médico</option>
+            </select> 
+            <input type="hidden" name="acao" value="<%= request.getParameter("acao") %>"/>
+            <button type="submite">Confirmar</button>
+        </form>
     </body>
 </html>
