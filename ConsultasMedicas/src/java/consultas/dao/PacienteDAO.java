@@ -60,8 +60,7 @@ public class PacienteDAO {
             ps.setString(1, cpf);
             ps.setString(2, senha);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs != null) {
-                rs.next();
+                if ( rs.next()) {
                     Paciente paciente = new Paciente();
                     paciente.setCPF(rs.getString("CPF"));
                     paciente.setNome(rs.getString("nome"));

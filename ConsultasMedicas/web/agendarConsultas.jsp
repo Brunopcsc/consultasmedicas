@@ -9,9 +9,14 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
+        <title>Agendar Consulta</title>
     </head>
     <body>
-        <h1>Hello World!</h1>
+        ${mensagens}
+       <form action="agendarConsultasServlet" method="post">
+           CRM do médico: <input name="CRM" type="text" value="" /><br/>
+           Data da consulta: <input name="data" type="text" value="" /><br/>        
+           <button type="submit">Confirmar</button>
+        </form>
     </body>
 </html>

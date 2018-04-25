@@ -42,8 +42,7 @@ public class AdministradorDAO {
             ps.setString(1, nome);
             ps.setString(2, senha);
             try (ResultSet rs = ps.executeQuery()) {
-                rs.next();
-                if (rs != null) {                    
+                if (rs.next()) {                    
                     Administrador admin = new Administrador();
                     admin.setNome(rs.getString("nome"));
                     admin.setSenha(rs.getString("senha"));

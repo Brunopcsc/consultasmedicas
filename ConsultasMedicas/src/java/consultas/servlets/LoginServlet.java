@@ -51,12 +51,6 @@ public class LoginServlet extends HttpServlet {
         String tipo;
         if (request.getSession().getAttribute("tipo") != null){
             tipo = request.getSession().getAttribute("tipo").toString() ;
-//            try{
-//            throw new Exception(tipo);
-//            } catch (Exception e) {
-//                request.setAttribute("mensagem", e.toString());
-//                request.getRequestDispatcher("erro.jsp").forward(request, response);
-//            }
         }else{
             tipo = null;
         }
@@ -70,9 +64,6 @@ public class LoginServlet extends HttpServlet {
                 
                 LoginFormBean npfb = new LoginFormBean();
                 try {
-                    // Obs: BeanUtils é uma classe da biblioteca
-                    // Apache Commons BeanUtils
-                    // http://commons.apache.org/beanutils/
                     BeanUtils.populate(npfb, request.getParameterMap());
 
                     List<String> mensagens = npfb.validar();
@@ -82,7 +73,7 @@ public class LoginServlet extends HttpServlet {
                             Medico medico = new Medico();
                             medico = mdao.verificaLogin(npfb.getLogin(), npfb.getSenha());
                             if (medico != null) {
-                                request.getSession().setAttribute("login", mdao);
+                                request.getSession().setAttribute("login", medico);
                                 request.getSession().setAttribute("tipo", "medico");
                                 String acao = request.getParameter("acao");
                                 if (acao.equals("listConsulta")) {
@@ -101,7 +92,7 @@ public class LoginServlet extends HttpServlet {
                             Paciente paciente = new Paciente();
                             paciente = pdao.verificaLogin(npfb.getLogin(), npfb.getSenha());
                             if (paciente != null) {
-                                request.getSession().setAttribute("login", pdao);
+                                request.getSession().setAttribute("login", paciente);
                                 request.getSession().setAttribute("tipo", "paciente");
                                 String acao = request.getParameter("acao");
                                 if (acao.equals("agendar")) {
@@ -120,7 +111,7 @@ public class LoginServlet extends HttpServlet {
                             Administrador admin = new Administrador();
                             admin = adao.verificaLogin(npfb.getLogin(), npfb.getSenha());
                             if (admin != null) {
-                                request.getSession().setAttribute("login", adao);
+                                request.getSession().setAttribute("login", admin);
                                 request.getSession().setAttribute("tipo", "admin");
                                 String acao = request.getParameter("acao");
                                 if (acao.equals("cadMed")) {

@@ -39,6 +39,9 @@ public class MedicoDAO {
             + " CRM, nome, senha, especialidade"
             + " from medico"
             + " where CRM=? and senha=?";
+    
+    
+    private final static String VERIFICA_MEDICO = "SELECT * FROM MEDICO WHERE CRM=?";
 
     DataSource dataSource;
 
@@ -105,8 +108,7 @@ public class MedicoDAO {
             ps.setString(1, crm);
             ps.setString(2, senha);
             try (ResultSet rs = ps.executeQuery()) {
-                if (rs != null) {
-                 rs.next();
+                if ( rs.next()) {
                     Medico med = new Medico();
                     med.setCRM(rs.getString("CRM"));
                     med.setNome(rs.getString("nome"));
@@ -116,6 +118,19 @@ public class MedicoDAO {
                 } else {
                     return null;
                 }
+            }
+        }
+    }
+    
+    public boolean verificaCRM(String crm) throws SQLException {
+        try (Connection con = dataSource.getConnection();
+                PreparedStatement ps = con.prepareStatement(VERIFICA_MEDICO)) {
+
+            ps.setString(1, crm);
+            try (ResultSet rs = ps.executeQuery()) {
+                if(rs.next())
+                    return true;
+                else return false;
             }
         }
     }
